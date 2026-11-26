@@ -18,8 +18,7 @@ assets/fonts/              Cormorant Garamond, EB Garamond, Jost (self-hosted, O
 medias/                    Original files (not used by the site)
 ```
 
-The line illustrations (divan, Redon port, Vannes ramparts and lavoirs,
-book, face-to-face armchairs) are inline SVG in the pages. Each stroke carries
+The line illustrations (divan, book, face-to-face armchairs) are inline SVG in the pages. Each stroke carries
 `pathLength="1"` so it can be "drawn" in CSS.
 
 ## Deploy on GitHub Pages
