@@ -180,7 +180,6 @@ em, i { font-style: normal; }
 .ill .soft { opacity: .72; }
 .ill .string { stroke: var(--teal); }
 .ill .glow { stroke: none; }
-.ill .water .d { stroke: var(--teal); opacity: .75; }
 .arr path, .menu-toggle path { stroke-width: 1px; vector-effect: non-scaling-stroke; }
 
 /* draw-on: --len is each path's measured length (main.js) */
@@ -188,7 +187,7 @@ em, i { font-style: normal; }
 .js .ill.is-ready .d:not(.soft) { transition: stroke-dashoffset 2.2s cubic-bezier(.45, 0, .25, 1) var(--dl, 0s); }
 .js .ill .d.soft { opacity: 0; transition: opacity 1.2s ease calc(var(--dl, 0s) + .4s); }
 .js .is-drawn .ill .d.soft, .js .ill.is-drawn .d.soft { opacity: .72; }
-.js .ill .glow { opacity: 0; transition: opacity 1.2s ease 1s; }
+.js .ill .glow { opacity: 0; transition: opacity 2.2s cubic-bezier(.45, 0, .25, 1); }
 .js .is-drawn .ill .d, .js .ill.is-drawn .d { stroke-dashoffset: 0; }
 .js .is-drawn .ill .glow { opacity: 1; }
 
@@ -221,7 +220,6 @@ em, i { font-style: normal; }
 /* addresses */
 .places { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 6rem); }
 .place { position: relative; }
-.place .ill { margin-bottom: 2rem; }
 .place h3 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; margin-bottom: .6rem; }
 .place address { font-style: normal; font-size: 1.18rem; color: var(--ink-2); margin-bottom: 1.6rem; line-height: 1.5; }
 
