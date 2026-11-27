@@ -23,7 +23,8 @@ medias/                    Original photos and files (not used by the site)
 
 - **One line.** Every page has a single continuous stroke running along the floor,
   edge to edge. It draws the lamp on every page and, on the home page, the divan.
-  It is traced once on load, from the left edge of the screen to the right one.
+  On the home page it is traced once on load, from the left edge of the screen to
+  the right one; on the other pages it is simply there.
 - **One light.** The lamp's glow is the only warm colour. It is dimmed on the
   404 page and comes back on when the visitor hovers the way home. In dark mode
   the page becomes the room at night and the lamp carries it.
