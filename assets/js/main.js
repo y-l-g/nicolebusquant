@@ -76,6 +76,37 @@
     });
   }
 
+  /* Jour / nuit : suit l'appareil par défaut ; un choix contraire est mémorisé
+     dans le navigateur (aucun cookie, rien n'est transmis). */
+  const sw = $('.theme-toggle');
+  if (sw) {
+    const night = matchMedia('(prefers-color-scheme: dark)');
+    const metas = $$('meta[name="theme-color"]');
+    const current = () => doc.getAttribute('data-theme') || (night.matches ? 'dark' : 'light');
+    const sync = () => {
+      const t = current();
+      sw.setAttribute('aria-pressed', String(t === 'dark'));
+      metas.forEach(m => m.setAttribute('content', t === 'dark' ? '#141819' : '#f3eee5'));
+    };
+    const apply = (t) => {
+      // un choix identique au réglage de l'appareil n'a pas besoin d'être retenu
+      const sys = night.matches ? 'dark' : 'light';
+      try {
+        if (t === sys) localStorage.removeItem('theme'); else localStorage.setItem('theme', t);
+      } catch (e) { /* stockage indisponible : le choix vaut pour cette page */ }
+      if (t === sys) doc.removeAttribute('data-theme'); else doc.setAttribute('data-theme', t);
+      sync();
+    };
+    sw.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !still) document.startViewTransition(() => apply(next));
+      else apply(next);
+    });
+    night.addEventListener('change', sync);
+    sync();
+  }
+
   const year = $('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
 })();

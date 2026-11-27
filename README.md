@@ -27,6 +27,9 @@ medias/                    Original photos and files (not used by the site)
 - **One light.** The lamp's glow is the only warm colour. It is dimmed on the
   404 page and comes back on when the visitor hovers the way home. In dark mode
   the page becomes the room at night and the lamp carries it.
+  The site follows the device setting; a small lamp switch in the footer
+  ("Mode nuit") overrides it, and the choice is kept in the browser's local
+  storage only when it differs from the device (no cookie).
 - **A book page.** Two axes only: the margin (columns 1 to 4: section names,
   notes, captions, the ADELI number) and the text column (columns 5 to 11).
   Page titles and the home title start at the container edge.

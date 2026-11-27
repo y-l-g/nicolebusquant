@@ -22,7 +22,7 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/eb-garamond.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>(function(d){d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement)</script>
 </head>
 <body class="page-legal">
 <a class="skip" href="#contenu">Aller au contenu</a>
@@ -83,6 +83,7 @@
           <h2>Politique de confidentialité</h2>
           <div class="text">
             <p>Ce site est une simple vitrine. Il ne comporte ni formulaire, ni outil de mesure d’audience, ni publicité, et ne dépose aucun cookie. Les polices de caractères sont hébergées sur le site lui-même&#8239;: aucune ressource n’est chargée depuis un service tiers lors de la consultation.</p>
+            <p>Si vous choisissez l’affichage de jour ou de nuit, ce choix est mémorisé dans votre navigateur (stockage local) pour les visites suivantes. Il n’est transmis à personne et vous pouvez l’effacer à tout moment avec les données de navigation.</p>
             <p>Comme tout hébergeur, GitHub peut enregistrer des données techniques de connexion (adresse IP notamment) à des fins de sécurité et de bon fonctionnement du service. Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité de GitHub</a>.</p>
             <p>La prise de rendez-vous s’effectue sur Doctolib, service tiers soumis à sa propre politique de confidentialité. Les liens «&#8239;Itinéraire&#8239;» ouvrent Google Maps dans un nouvel onglet.</p>
             <p>Les informations que vous transmettez par téléphone ou par email sont utilisées uniquement pour vous répondre et organiser les rendez-vous&#8239;; elles ne sont jamais cédées à des tiers. Conformément au RGPD, vous pouvez exercer vos droits d’accès, de rectification et d’effacement en écrivant à <a href="mailto:nbusquant@gmail.com">nbusquant@gmail.com</a>.</p>
@@ -129,7 +130,10 @@
     </div>
     <div class="foot-base">
       <span>© <span data-year>2026</span> Nicole Busquant</span>
-      <a href="legal.html">Mentions légales</a>
+      <span class="end">
+        <button class="theme-toggle" type="button" aria-pressed="false"><svg viewBox="0 0 10 16" aria-hidden="true" focusable="false"><path class="shade" d="M2.6 1h4.8L9 6.2H1z"/><path d="M5 6.2V15M3 15h4"/></svg>Mode nuit</button>
+        <a href="legal.html">Mentions légales</a>
+      </span>
     </div>
   </div>
 </footer>
