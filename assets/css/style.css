@@ -55,8 +55,11 @@
   --ease: cubic-bezier(.2, .7, .1, 1);
 }
 
+/* la nuit : suit le réglage de l'appareil, sauf choix contraire du visiteur
+   (interrupteur en pied de page, mémorisé dans le navigateur) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --paper: #141819;
     --paper-2: #1c2122;
     --ink: #e9e2d4;
@@ -69,6 +72,20 @@
     --photo: brightness(.9);
   }
 }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141819;
+  --paper-2: #1c2122;
+  --ink: #e9e2d4;
+  --ink-2: #b5afa3;
+  --ink-3: #8f8a80;
+  --accent: #93c4c7;
+  --mark: #7fb8bd;
+  --rule: color-mix(in srgb, var(--ink) 16%, transparent);
+  --glow: .9;
+  --photo: brightness(.9);
+}
+:root[data-theme="light"] { color-scheme: light; }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -403,6 +420,20 @@ a:hover .arr path { transform: translateX(3px); }
   margin-top: clamp(3rem, 6vw, 4.5rem);
   font-size: .94rem; color: var(--ink-3);
 }
+.foot-base .end { display: flex; align-items: baseline; gap: .5rem 2rem; flex-wrap: wrap; }
+
+/* interrupteur jour / nuit : une petite lampe */
+.theme-toggle {
+  display: none; align-items: baseline; gap: .5em;
+  background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+  font: inherit; color: inherit;
+}
+.js .theme-toggle { display: inline-flex; }
+.theme-toggle:hover { color: var(--accent); }
+.theme-toggle svg { width: .62em; height: auto; align-self: center; overflow: visible; }
+.theme-toggle path { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.theme-toggle .shade { fill: transparent; transition: fill .4s; }
+.theme-toggle[aria-pressed="true"] .shade { fill: var(--lamp); stroke: var(--lamp); }
 
 /* ---------- Tablette ---------- */
 @media (max-width: 1080px) {
