@@ -6,12 +6,6 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-  /* En-tête : un filet discret dès que la page a bougé. */
-  const header = $('.site-header');
-  const onScroll = () => { if (header) header.classList.toggle('is-scrolled', window.scrollY > 24); };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
   /* Menu mobile */
   const toggle = $('.menu-toggle');
   if (toggle) {
@@ -24,31 +18,41 @@
     toggle.addEventListener('click', () => setOpen(!doc.classList.contains('menu-open')));
     $$('.nav a').forEach(a => a.addEventListener('click', () => setOpen(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    matchMedia('(min-width: 761px)').addEventListener('change', e => { if (e.matches) setOpen(false); });
   }
 
-  /* Dessins : même épaisseur à l'écran quelle que soit l'échelle,
-     longueur exacte de chaque trait pour que le tracé soit juste. */
+  /* Le trait : il part du bord gauche de l'écran, dessine la lampe (et le divan),
+     puis repart jusqu'au bord droit. Épaisseur constante à l'écran. */
   const ills = $$('svg.ill');
-  const sizeStrokes = () => ills.forEach(svg => {
+  const fit = () => ills.forEach(svg => {
     const vb = svg.viewBox.baseVal;
-    const w = svg.getBoundingClientRect().width;
-    if (vb && vb.width && w) svg.style.setProperty('--sw', (vb.width / w).toFixed(3));
+    const r = svg.getBoundingClientRect();
+    if (!vb || !vb.width || !r.width) return;
+    const k = vb.width / r.width;
+    svg.style.setProperty('--sw', k.toFixed(3));
+    const y = svg.dataset.floor;
+    if (y === undefined) return;
+    const x0 = vb.x - r.left * k - 2;
+    const x1 = vb.x + (doc.clientWidth - r.left) * k + 2;
+    const fl = $('.f-l', svg), fr = $('.f-r', svg);
+    if (fl) fl.setAttribute('d', `M${x0.toFixed(1)} ${y}H${svg.dataset.start}`);
+    if (fr) fr.setAttribute('d', `M${svg.dataset.end} ${y}H${x1.toFixed(1)}`);
+    $$('path', svg).forEach(p => {
+      try { p.style.setProperty('--len', Math.ceil(p.getTotalLength()) + 2); } catch (e) { /* tracé statique */ }
+    });
   });
-  ills.forEach(svg => $$('.d', svg).forEach(p => {
-    try { p.style.setProperty('--len', Math.ceil(p.getTotalLength()) + 1); } catch (e) { /* non mesurable : tracé statique */ }
-  }));
-  sizeStrokes();
+  fit();
   let frame = 0;
   window.addEventListener('resize', () => {
     cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(sizeStrokes);
+    frame = requestAnimationFrame(fit);
   }, { passive: true });
 
   /* Le dessin se trace une seule fois, une fois la page chargée. */
   const draw = () => requestAnimationFrame(() => requestAnimationFrame(() =>
     ills.forEach(svg => svg.classList.add('is-drawn'))));
-  if (document.readyState === 'complete') setTimeout(draw, 150);
-  else window.addEventListener('load', () => setTimeout(draw, 150), { once: true });
+  if (document.readyState === 'complete') setTimeout(draw, 120);
+  else window.addEventListener('load', () => setTimeout(draw, 120), { once: true });
 
   /* Agrandissement des photos */
   const lb = $('.lightbox');
