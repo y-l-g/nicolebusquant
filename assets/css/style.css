@@ -232,17 +232,18 @@ a:hover .arr path { transform: translateX(3px); }
 /* ---------- Le trait : un tracé, une épaisseur, joué une fois ---------- */
 .ill { width: 100%; height: auto; overflow: visible; color: var(--ink); }
 .ill path { fill: none; stroke: currentColor; stroke-width: var(--sw, 1); stroke-linecap: round; stroke-linejoin: round; }
+/* Le trait se dessine seulement sur l’accueil ; ailleurs, la lampe est déjà là. */
 .ill .glow { opacity: var(--glow); }
-.js .ill path {
+.js .scene .ill path {
   stroke-dasharray: var(--len, 9999) var(--len, 9999);
   stroke-dashoffset: var(--len, 9999);
 }
-.js .ill.is-drawn path { stroke-dashoffset: 0; }
-.js .ill.is-drawn .f-l { transition: stroke-dashoffset .7s cubic-bezier(.4, 0, .6, 1); }
-.js .ill.is-drawn .line { transition: stroke-dashoffset var(--dur, 3.4s) cubic-bezier(.42, 0, .3, 1) .62s; }
-.js .ill.is-drawn .f-r { transition: stroke-dashoffset .9s cubic-bezier(.3, 0, .2, 1) calc(var(--dur, 3.4s) + .5s); }
-.js .ill .glow { opacity: 0; }
-.js .ill.is-drawn .glow { opacity: var(--glow); transition: opacity 2.6s ease 1.5s; }
+.js .scene .ill.is-drawn path { stroke-dashoffset: 0; }
+.js .scene .ill.is-drawn .f-l { transition: stroke-dashoffset .7s cubic-bezier(.4, 0, .6, 1); }
+.js .scene .ill.is-drawn .line { transition: stroke-dashoffset var(--dur, 3.4s) cubic-bezier(.42, 0, .3, 1) .62s; }
+.js .scene .ill.is-drawn .f-r { transition: stroke-dashoffset .9s cubic-bezier(.3, 0, .2, 1) calc(var(--dur, 3.4s) + .5s); }
+.js .scene .ill .glow { opacity: 0; }
+.js .scene .ill.is-drawn .glow { opacity: var(--glow); transition: opacity 2.6s ease 1.5s; }
 
 /* ---------- Accueil : la pièce ---------- */
 .hero { position: relative; }
